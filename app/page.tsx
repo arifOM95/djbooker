@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Navbar from "@/components/navbar"
 
 const featuredDJs = [
   { name: "DJ Marcus", city: "Berlin", years: 8, genres: ["House", "Techno", "Wedding"], price: 400, rating: 4.9, reviews: 42, top: true },
@@ -11,18 +12,7 @@ const categories = ["Wedding", "Corporate", "Birthday", "Club night", "Festival"
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
-        <div className="text-lg font-semibold tracking-tight">DJBooker</div>
-        <div className="hidden md:flex gap-6 text-sm text-gray-500">
-          <Link href="/djs" className="hover:text-black">Browse DJs</Link>
-          <a href="#how-it-works" className="hover:text-black">How it works</a>
-          <a href="#" className="hover:text-black">For DJs</a>
-        </div>
-        <div className="flex gap-2">
-          <Link href="/login" className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-gray-400 transition-colors">Log in</Link>
-          <Link href="/register" className="px-4 py-2 text-sm bg-black text-white rounded-lg hover:bg-gray-800 transition-colors">Sign up</Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="px-8 pt-16 pb-12 text-center">
         <h1 className="text-5xl font-semibold tracking-tight leading-tight mb-3">

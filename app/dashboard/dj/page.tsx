@@ -2,16 +2,18 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
+import Link from "next/link"
 
 const GENRES = ["House", "Techno", "Trance", "Hip-Hop", "R&B", "Pop", "Rock", "Jazz", "Dancehall", "Reggae", "Wedding", "Commercial", "80s/90s", "Latin", "Electronic"]
 
 export default function DJDashboard() {
   const router = useRouter()
+  const { data: session, status } = useSession()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(false)
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
-
   const [form, setForm] = useState({
     city: "", bio: "", priceFrom: "", priceTo: "",
     yearsActive: "", instagram: "", soundcloud: "",
@@ -50,11 +52,22 @@ export default function DJDashboard() {
     }
   }
 
+  if (status === "loading") return <div className="min-h-screen flex items-center justify-center text-sm text-gray-400">Loading...</div>
+
+  if (!session) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <p className="text-gray-500 mb-4">You need to be logged in to access this page.</p>
+        <Link href="/login" className="px-5 py-2 bg-black text-white rounded-lg text-sm">Log in</Link>
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white flex items-center justify-between px-8 py-4 border-b border-gray-100">
-        <div className="text-lg font-semibold tracking-tight">DJBooker</div>
-        <div className="text-sm text-gray-400">DJ Dashboard</div>
+        <Link href="/" className="text-lg font-semibold tracking-tight">DJBooker</Link>
+        <div className="text-sm text-gray-400">Welcome, {session.user?.name || session.user?.email}</div>
       </nav>
 
       <div className="max-w-2xl mx-auto px-8 py-10">

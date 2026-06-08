@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Navbar from "@/components/navbar"
 import { prisma } from "@/lib/prisma"
 
 interface SearchParams {
@@ -30,13 +31,7 @@ export default async function DJsPage({ searchParams }: { searchParams: SearchPa
 
   return (
     <div className="min-h-screen bg-white">
-      <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
-        <Link href="/" className="text-lg font-semibold tracking-tight">DJBooker</Link>
-        <div className="flex gap-2">
-          <Link href="/login" className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-gray-400 transition-colors">Log in</Link>
-          <Link href="/register" className="px-4 py-2 text-sm bg-black text-white rounded-lg hover:bg-gray-800 transition-colors">Sign up</Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="px-8 py-6 border-b border-gray-100">
         <form method="GET" className="flex items-center bg-white border border-gray-300 rounded-full px-5 py-2 max-w-2xl gap-3 shadow-sm">
